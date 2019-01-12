@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>timeline-origin</artifactId>
+        <groupId>org.jcy</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>timeline-swt</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jcy</groupId>
+            <artifactId>timeline-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.swt</groupId>
+            <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
+            <version>${swt-version}</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.jcy</groupId>
+            <artifactId>timeline-test-util</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jcy</groupId>
+            <artifactId>timeline-test-util</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
