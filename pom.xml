@@ -8,6 +8,7 @@
     <artifactId>timeline-origin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
+        <module>build-tools</module>
         <module>timeline-core</module>
         <module>timeline-util</module>
         <module>timeline-swing</module>
@@ -93,6 +94,8 @@
 
     <build>
         <plugins>
+            <!-- 静态代码分析 -->
+            <!-- SpotBugs -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -104,15 +107,76 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>run</id>
-                        <!-- 在package 阶段触发 -->
-                        <phase>package</phase>
+                        <id>run-spotbugs</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>spotbugs</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            <!-- PMD -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <linkXref>false</linkXref>
+                    <sourceEncoding>utf-8</sourceEncoding>
+                    <targetJdk>1.8</targetJdk>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>run-pmd</id>
+                        <!-- 在package 阶段触发 -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>pmd</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- CheckStyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>run-checkstyle-alibaba</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>build-tools/src/main/resources/alibaba_checks.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>false</failsOnError>
+                            <linkXRef>false</linkXRef>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <encoding>utf-8</encoding>
+                        </configuration>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>run-checkstyle-google</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>google_checks.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>false</failsOnError>
+                            <linkXRef>false</linkXRef>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <encoding>utf-8</encoding>
+                        </configuration>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
