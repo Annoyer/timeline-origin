@@ -153,6 +153,7 @@
                             <linkXRef>false</linkXRef>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
                             <encoding>utf-8</encoding>
+                            <outputFile>${project.build.directory}/checkstyle/alibaba/checkstyle-result.xml</outputFile>
                         </configuration>
                         <goals>
                             <goal>checkstyle</goal>
@@ -169,6 +170,7 @@
                             <linkXRef>false</linkXRef>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
                             <encoding>utf-8</encoding>
+                            <outputFile>${project.build.directory}/checkstyle/google/checkstyle-result.xml</outputFile>
                         </configuration>
                         <goals>
                             <goal>checkstyle</goal>
