@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <title>Jenkins Web Test</title>
+</head>
+
+<body>
+<h2>${title}</h2>
+
+<button id="moreBtn" onclick="localRefresh()">MORE</button>
+<div id="msgTable" th:fragment="msgTable" >
+    <table border="1">
+        <tbody>
+        <tr th:each="m:${msgs}">
+            <td class="msg" th:text="${m}">none</td>
+        </tr>
+        </tbody>
+    </table></div>
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+    function localRefresh() {
+        // 装载局部刷新返回的页面
+        $('#msgTable').load("more");
+    }
+</script>
+</html>
