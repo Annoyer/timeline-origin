@@ -33,7 +33,7 @@ public class FileSessionStorage<T extends Item> implements SessionStorage<T> {
 
     public FileSessionStorage(File storageLocation, ItemSerialization<T> itemSerialization) {
         checkArgument(storageLocation != null, Messages.get("STORAGE_LOCATION_MUST_NOT_BE_NULL"));
-        checkArgument(itemSerialization != null, Messages.get("ITEM_SERIALIZATION_NUST_NOT_BE_NULL"), itemSerialization);
+        checkArgument(itemSerialization != null, Messages.get("ITEM_SERIALIZATION_MUST_NOT_BE_NULL"), itemSerialization);
         checkArgument(isAccessibleFile(storageLocation), Messages.get("STORAGE_LOCATION_IS_NOT_ACCESSIBLE"), storageLocation);
 
         this.storageLocation = storageLocation;

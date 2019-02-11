@@ -90,7 +90,7 @@ public class FileSessionStorageITest {
         Throwable actual = thrownBy(() -> new FileSessionStorage<>(temporaryFolder.newFile(), null));
 
         assertThat(actual)
-                .hasMessageContaining(Messages.get("ITEM_SERIALIZATION_NUST_NOT_BE_NULL"))
+                .hasMessageContaining(Messages.get("ITEM_SERIALIZATION_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

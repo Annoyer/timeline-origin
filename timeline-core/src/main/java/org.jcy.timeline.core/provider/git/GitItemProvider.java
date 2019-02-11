@@ -35,7 +35,7 @@ public class GitItemProvider implements ItemProvider<GitItem> {
         checkArgument(uri != null, Messages.get("URI_MUST_NOT_BE_NULL"));
         checkArgument(destination != null, Messages.get("DESTINATION_MUST_NOT_BE_NULL"));
         checkArgument(name != null, Messages.get("NAME_MUST_NOT_BE_NULL"));
-        checkArgument(!destination.exists() || destination.isDirectory(), Messages.get("DESTINATION_MUST_BE_A_DIRECTORY, destination"));
+        checkArgument(!destination.exists() || destination.isDirectory(), Messages.get("DESTINATION_MUST_BE_A_DIRECTORY", destination));
 
         operator = new GitOperator(cloneIfNeeded(uri, destination, name));
     }
