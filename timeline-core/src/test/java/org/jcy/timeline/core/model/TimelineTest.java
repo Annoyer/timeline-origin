@@ -1,6 +1,7 @@
 package org.jcy.timeline.core.model;
 
 import com.squareup.burst.BurstJUnit4;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,7 +72,7 @@ public class TimelineTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(formatErrorMessage(ERROR_EXCEEDS_LOWER_BOUND, tooSmall));
+                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_LOWER_BOUND"), tooSmall));
     }
 
     @Test
@@ -82,7 +83,7 @@ public class TimelineTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(formatErrorMessage(ERROR_EXCEEDS_UPPER_BOUND, tooLarge));
+                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_UPPER_BOUND"), tooLarge));
     }
 
     @Test
@@ -172,7 +173,7 @@ public class TimelineTest {
         Throwable actual = thrownBy(() -> timeline.setTopItem(null));
 
         assertThat(actual)
-                .hasMessageContaining(ERROR_TOP_ITEM_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("ERROR_TOP_ITEM_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -181,7 +182,7 @@ public class TimelineTest {
         Throwable actual = thrownBy(() -> new Timeline<>(null, sessionStorage));
 
         assertThat(actual)
-                .hasMessage(ERROR_ITEM_PROVIDER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ERROR_ITEM_PROVIDER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -190,7 +191,7 @@ public class TimelineTest {
         Throwable actual = thrownBy(() -> new Timeline<>(itemProvider, null));
 
         assertThat(actual)
-                .hasMessage(ERROR_SESSION_PROVIDER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ERROR_SESSION_PROVIDER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

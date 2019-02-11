@@ -4,10 +4,11 @@ import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.ItemProvider;
 import org.jcy.timeline.core.model.Memento;
 import org.jcy.timeline.core.model.SessionStorage;
-import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.core.ui.ItemUiFactory;
+import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.util.BackgroundProcessor;
 import org.eclipse.swt.widgets.Composite;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class SwtTimelineCompoundITest {
         Throwable actual = thrownBy(() -> new SwtTimelineCompound<>(null, itemUiFactory, sessionStorage));
 
         assertThat(actual)
-                .hasMessage(ITEM_PROVIDER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_PROVIDER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -67,7 +68,7 @@ public class SwtTimelineCompoundITest {
         Throwable actual = thrownBy(() -> new SwtTimelineCompound<>(itemProvider, null, sessionStorage));
 
         assertThat(actual)
-                .hasMessage(ITEM_UI_FACTORY_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_UI_FACTORY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -76,7 +77,7 @@ public class SwtTimelineCompoundITest {
         Throwable actual = thrownBy(() -> new SwtTimelineCompound<>(itemProvider, itemUiFactory, null));
 
         assertThat(actual)
-                .hasMessage(SESSION_STORAGE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("SESSION_STORAGE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

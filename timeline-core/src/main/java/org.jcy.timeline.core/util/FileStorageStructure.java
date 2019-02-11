@@ -1,5 +1,7 @@
 package org.jcy.timeline.core.util;
 
+import org.jcy.timeline.util.Messages;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,14 +10,13 @@ import static org.jcy.timeline.util.Assertion.checkArgument;
 
 public class FileStorageStructure {
 
-    static final String BASE_DIRECTORY_MUST_NOT_BE_NULL = "Argument 'baseDirectory' must not be null.";
     static final String STORAGE_FILE = "session.storage";
     static final String TIMELINE_DIRECTORY = ".timeline";
 
     private final File baseDirectory;
 
     public FileStorageStructure(File baseDirectory) {
-        checkArgument(baseDirectory != null, BASE_DIRECTORY_MUST_NOT_BE_NULL);
+        checkArgument(baseDirectory != null, Messages.get("BASE_DIRECTORY_MUST_NOT_BE_NULL"));
         try {
             this.baseDirectory = baseDirectory.getCanonicalFile();
         } catch (IOException cause) {

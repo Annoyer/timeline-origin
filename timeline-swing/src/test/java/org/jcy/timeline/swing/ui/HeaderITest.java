@@ -3,6 +3,7 @@ package org.jcy.timeline.swing.ui;
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.Timeline;
 import org.jcy.timeline.util.BackgroundProcessor;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -11,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static org.jcy.timeline.swing.BackgroundThreadHelper.directBackgroundProcessor;
-import static org.jcy.timeline.swing.ui.Header.TITLE_MUST_NOT_BE_NULL;
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentCaptor.forClass;
@@ -100,7 +100,7 @@ public class HeaderITest {
         Throwable actual = thrownBy(() -> header.setTitle(null));
 
         assertThat(actual)
-                .hasMessage(TITLE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("TITLE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

@@ -4,6 +4,7 @@ import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.ItemSerialization;
 import org.jcy.timeline.core.model.Memento;
 import org.jcy.timeline.core.model.SessionStorage;
+import org.jcy.timeline.util.Messages;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,20 +26,15 @@ import static java.util.stream.Collectors.toSet;
 
 public class FileSessionStorage<T extends Item> implements SessionStorage<T> {
 
-    static final String STORAGE_LOCATION_MUST_NOT_BE_NULL = "Argument 'storageLocation' must not be null.";
-    static final String ITEM_SERIALIZATION_NUST_NOT_BE_NULL = "Argument 'itemSerialization' nust not be null.";
-    static final String STORAGE_LOCATION_IS_NOT_ACCESSIBLE
-            = "File <%s> is not accessible, meaning it may not exist or isn't read or writable.";
-
     private static final String ITEM_SEPARATOR = "@;@@@;@";
 
     private final ItemSerialization<T> itemSerialization;
     private final File storageLocation;
 
     public FileSessionStorage(File storageLocation, ItemSerialization<T> itemSerialization) {
-        checkArgument(storageLocation != null, STORAGE_LOCATION_MUST_NOT_BE_NULL);
-        checkArgument(itemSerialization != null, ITEM_SERIALIZATION_NUST_NOT_BE_NULL, itemSerialization);
-        checkArgument(isAccessibleFile(storageLocation), STORAGE_LOCATION_IS_NOT_ACCESSIBLE, storageLocation);
+        checkArgument(storageLocation != null, Messages.get("STORAGE_LOCATION_MUST_NOT_BE_NULL"));
+        checkArgument(itemSerialization != null, Messages.get("ITEM_SERIALIZATION_NUST_NOT_BE_NULL"), itemSerialization);
+        checkArgument(isAccessibleFile(storageLocation), Messages.get("STORAGE_LOCATION_IS_NOT_ACCESSIBLE"), storageLocation);
 
         this.storageLocation = storageLocation;
         this.itemSerialization = itemSerialization;

@@ -1,16 +1,16 @@
 package org.jcy.timeline.swt.ui;
 
 import org.jcy.timeline.core.model.Item;
-import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.core.ui.ItemViewer;
+import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+import org.jcy.timeline.util.Messages;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.jcy.timeline.swt.ui.SwtAutoUpdate.*;
 import static org.jcy.timeline.swt.ui.SwtTimelineCompoundHelper.stubHeader;
 import static org.jcy.timeline.swt.ui.SwtTimelineCompoundHelper.stubItemViewer;
 import static org.jcy.timeline.test.util.swt.DisplayHelper.flushPendingEvents;
@@ -71,7 +71,7 @@ public class SwtAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwtAutoUpdate<>(null, itemViewer, DELAY));
 
         assertThat(actual)
-                .hasMessage(HEADER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("HEADER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -80,7 +80,7 @@ public class SwtAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwtAutoUpdate<>(header, null, DELAY));
 
         assertThat(actual)
-                .hasMessage(ITEM_VIEWER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_VIEWER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -89,7 +89,7 @@ public class SwtAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwtAutoUpdate<>(header, itemViewer, -1));
 
         assertThat(actual)
-                .hasMessage(DELAY_MUST_NOT_BE_NEGATIVE)
+                .hasMessage(Messages.get("DELAY_MUST_NOT_BE_NEGATIVE"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

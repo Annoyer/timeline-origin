@@ -3,11 +3,11 @@ package org.jcy.timeline.swt.ui;
 import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.util.BackgroundProcessor;
 import org.eclipse.swt.SWTException;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.jcy.timeline.swt.ui.SwtUiThreadDispatcher.RUNNABLE_MUST_NOT_BE_NULL;
 import static org.jcy.timeline.test.util.swt.DisplayHelper.flushPendingEvents;
 import static org.jcy.timeline.test.util.ThreadHelper.sleep;
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
@@ -63,7 +63,7 @@ public class SwtUiThreadDispatcherITest {
         Throwable actual = thrownBy(() -> dispatcher.dispatch(null));
 
         assertThat(actual)
-                .hasMessage(RUNNABLE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("RUNNABLE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,7 +72,7 @@ public class SwtUiThreadDispatcherITest {
         Throwable actual = thrownBy(() -> new SwtUiThreadDispatcher(null));
 
         assertThat(actual)
-                .hasMessage(SwtUiThreadDispatcher.DISPLAY_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("DISPLAY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -83,7 +83,7 @@ public class SwtUiThreadDispatcherITest {
         Throwable actual = thrownBy(() -> flushPendingEvents());
 
         assertThat(actual)
-                .hasMessageContaining(SwtUiThreadDispatcher.DISPLAY_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("DISPLAY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(SWTException.class)
                 .hasCauseInstanceOf(IllegalArgumentException.class);
     }

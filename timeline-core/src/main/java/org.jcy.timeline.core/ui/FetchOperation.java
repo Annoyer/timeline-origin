@@ -2,6 +2,7 @@ package org.jcy.timeline.core.ui;
 
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.Timeline;
+import org.jcy.timeline.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ public enum FetchOperation {
         @Override
         public <T extends Item> void fetch(Timeline<T> timeline) {
             log.info("Fetch Operation [NEW] is called.");
-            checkArgument(timeline != null, TIMELINE_MUST_NOT_BE_NULL);
+            checkArgument(timeline != null, Messages.get("TIMELINE_MUST_NOT_BE_NULL"));
 
             timeline.fetchNew();
         }
@@ -32,15 +33,13 @@ public enum FetchOperation {
         @Override
         public <T extends Item> void fetch(Timeline<T> timeline) {
             log.info("Fetch Operation [MORE] is called.");
-            checkArgument(timeline != null, TIMELINE_MUST_NOT_BE_NULL);
+            checkArgument(timeline != null, Messages.get("TIMELINE_MUST_NOT_BE_NULL"));
 
             timeline.fetchItems();
         }
     };
 
     private static final Logger log = LoggerFactory.getLogger(FetchOperation.class);
-
-    static final String TIMELINE_MUST_NOT_BE_NULL = "Argument 'timeline' must not be null.";
 
     public abstract <T extends Item> void fetch(Timeline<T> timeline);
 }

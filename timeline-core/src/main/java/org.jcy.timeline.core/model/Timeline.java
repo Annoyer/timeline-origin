@@ -1,5 +1,6 @@
 package org.jcy.timeline.core.model;
 
+import org.jcy.timeline.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,15 +20,6 @@ public class Timeline<T extends Item> {
     public static final int FETCH_COUNT_UPPER_BOUND = 20;
     public static final int DEFAULT_FETCH_COUNT = 10;
 
-    static final String ERROR_EXCEEDS_LOWER_BOUND
-            = "FetchCount of %s exceeds lower bound of " + FETCH_COUNT_LOWER_BOUND + ".";
-    static final String ERROR_EXCEEDS_UPPER_BOUND
-            = "FetchCount of %s exceeds upper bound of " + FETCH_COUNT_UPPER_BOUND + ".";
-    static final String ERROR_TOP_ITEM_IS_UNRELATED = "TopItem <%s> is not contained in item list.";
-    static final String ERROR_TOP_ITEM_MUST_NOT_BE_NULL = "Argument 'topItem' must not be null.";
-    static final String ERROR_SESSION_PROVIDER_MUST_NOT_BE_NULL = "Argument 'sessionProvider' must not be null.";
-    static final String ERROR_ITEM_PROVIDER_MUST_NOT_BE_NULL = "Argument 'itemProvider' must not be null.";
-
     private final SessionStorage<T> sessionStorage;
     private final ItemProvider<T> itemProvider;
     private final List<T> items;
@@ -36,8 +28,8 @@ public class Timeline<T extends Item> {
     private int fetchCount;
 
     public Timeline(ItemProvider<T> itemProvider, SessionStorage<T> sessionStorage) {
-        checkArgument(itemProvider != null, ERROR_ITEM_PROVIDER_MUST_NOT_BE_NULL);
-        checkArgument(sessionStorage != null, ERROR_SESSION_PROVIDER_MUST_NOT_BE_NULL);
+        checkArgument(itemProvider != null, Messages.get("ERROR_ITEM_PROVIDER_MUST_NOT_BE_NULL"));
+        checkArgument(sessionStorage != null, Messages.get("ERROR_SESSION_PROVIDER_MUST_NOT_BE_NULL"));
 
         this.itemProvider = itemProvider;
         this.sessionStorage = sessionStorage;
@@ -50,8 +42,8 @@ public class Timeline<T extends Item> {
     }
 
     public void setFetchCount(int fetchCount) {
-        checkArgument(fetchCount <= FETCH_COUNT_UPPER_BOUND, ERROR_EXCEEDS_UPPER_BOUND, fetchCount);
-        checkArgument(fetchCount >= FETCH_COUNT_LOWER_BOUND, ERROR_EXCEEDS_LOWER_BOUND, fetchCount);
+        checkArgument(fetchCount <= FETCH_COUNT_UPPER_BOUND, Messages.get("ERROR_EXCEEDS_UPPER_BOUND", FETCH_COUNT_UPPER_BOUND), fetchCount);
+        checkArgument(fetchCount >= FETCH_COUNT_LOWER_BOUND, Messages.get("ERROR_EXCEEDS_LOWER_BOUND", FETCH_COUNT_LOWER_BOUND), fetchCount);
         this.fetchCount = fetchCount;
     }
 
@@ -64,8 +56,8 @@ public class Timeline<T extends Item> {
     }
 
     public void setTopItem(T topItem) {
-        checkArgument(topItem != null, ERROR_TOP_ITEM_MUST_NOT_BE_NULL);
-        checkArgument(items.contains(topItem), ERROR_TOP_ITEM_IS_UNRELATED, topItem.getId());
+        checkArgument(topItem != null, Messages.get("ERROR_TOP_ITEM_MUST_NOT_BE_NULL"));
+        checkArgument(items.contains(topItem), Messages.get("ERROR_TOP_ITEM_IS_UNRELATED"), topItem.getId());
 
         this.topItem = Optional.of(topItem);
         sessionStorage.store(createMemento());

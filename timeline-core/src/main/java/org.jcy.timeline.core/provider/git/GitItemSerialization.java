@@ -2,22 +2,18 @@ package org.jcy.timeline.core.provider.git;
 
 
 import org.jcy.timeline.core.model.ItemSerialization;
+import org.jcy.timeline.util.Messages;
 
 import static org.jcy.timeline.util.Assertion.checkArgument;
 import static java.lang.Long.parseLong;
 
 public class GitItemSerialization implements ItemSerialization<GitItem> {
 
-    static final String ITEM_MUST_NOT_BE_NULL = "Argument 'item' must not be null.";
-    static final String INPUT_MUST_NOT_BE_NULL = "Argument 'input' must not be null.";
-    static final String INPUT_IS_NO_VALID = "Input <%s> is no valid.";
-
     private static final String SEPARATOR = "@;@;@;@";
-
 
     @Override
     public String serialize(GitItem item) {
-        checkArgument(item != null, ITEM_MUST_NOT_BE_NULL);
+        checkArgument(item != null, Messages.get("ITEM_MUST_NOT_BE_NULL"));
 
         return new StringBuilder()
                 .append(item.getId()).append(SEPARATOR)
@@ -28,7 +24,7 @@ public class GitItemSerialization implements ItemSerialization<GitItem> {
 
     @Override
     public GitItem deserialize(String input) {
-        checkArgument(input != null, INPUT_MUST_NOT_BE_NULL);
+        checkArgument(input != null, Messages.get("INPUT_MUST_NOT_BE_NULL"));
 
         String[] split = input.split(SEPARATOR);
         return new GitItem(split[0], parseLong(split[1]), split[2], split[3]);

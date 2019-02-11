@@ -1,5 +1,7 @@
 package org.jcy.timeline.core.model;
 
+import org.jcy.timeline.util.Messages;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -7,11 +9,6 @@ import java.util.Set;
 import static org.jcy.timeline.util.Assertion.checkArgument;
 
 public class Memento<T extends Item> {
-
-    static final String TOP_ITEM_IS_MISSING = "Top item is missing.";
-    static final String TOP_ITEM_IS_UNRELATED = "Top item is unrelated.";
-    static final String ARGUMENT_ITEMS_MUST_NOT_BE_NULL = "Argument 'items' must not be null.";
-    static final String ARGUMENT_TOP_ITEM_MUST_NOT_BE_NULL = "Argument 'topItem' must not be null.";
 
     private static final Memento<?> EMPTY_MEMENTO = new Memento<>(new HashSet<>(), Optional.empty());
 
@@ -24,10 +21,10 @@ public class Memento<T extends Item> {
     }
 
     public Memento(Set<T> items, Optional<T> topItem) {
-        checkArgument(items != null, ARGUMENT_ITEMS_MUST_NOT_BE_NULL);
-        checkArgument(topItem != null, ARGUMENT_TOP_ITEM_MUST_NOT_BE_NULL);
-        checkArgument(topItemExistsIfItemsNotEmpty(items, topItem), TOP_ITEM_IS_MISSING);
-        checkArgument(topItemIsElementOfItems(items, topItem), TOP_ITEM_IS_UNRELATED);
+        checkArgument(items != null, Messages.get("ARGUMENT_ITEMS_MUST_NOT_BE_NULL"));
+        checkArgument(topItem != null, Messages.get("ARGUMENT_TOP_ITEM_MUST_NOT_BE_NULL"));
+        checkArgument(topItemExistsIfItemsNotEmpty(items, topItem), Messages.get("TOP_ITEM_IS_MISSING"));
+        checkArgument(topItemIsElementOfItems(items, topItem), Messages.get("TOP_ITEM_IS_UNRELATED"));
 
         this.items = new HashSet<>(items);
         this.topItem = topItem;

@@ -8,13 +8,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import static org.jcy.timeline.swt.BackgroundThreadHelper.directBackgroundProcessor;
-import static org.jcy.timeline.swt.ui.Header.TITLE_MUST_NOT_BE_NULL;
 import static org.jcy.timeline.test.util.swt.SwtEventHelper.trigger;
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,7 +106,7 @@ public class HeaderITest {
         Throwable actual = thrownBy(() -> header.setTitle(null));
 
         assertThat(actual)
-                .hasMessage(TITLE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("TITLE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

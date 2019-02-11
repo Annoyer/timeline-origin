@@ -2,8 +2,8 @@ package org.jcy.timeline.swt.ui;
 
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.Timeline;
-import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.core.ui.ItemUiMap;
+import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.Before;

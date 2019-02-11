@@ -1,8 +1,8 @@
 package org.jcy.timeline.swt.ui;
 
 import org.jcy.timeline.core.model.Item;
-import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.core.ui.ItemViewer;
+import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;

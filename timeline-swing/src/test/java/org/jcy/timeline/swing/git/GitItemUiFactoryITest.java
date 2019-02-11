@@ -2,6 +2,7 @@ package org.jcy.timeline.swing.git;
 
 import org.jcy.timeline.core.provider.git.GitItem;
 import org.jcy.timeline.swing.ui.SwingItemUi;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class GitItemUiFactoryITest {
         Throwable actual = thrownBy(() -> factory.create(null, gitItem, INDEX));
 
         assertThat(actual)
-                .hasMessage(UI_CONTEXT_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("UI_CONTEXT_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -48,7 +49,7 @@ public class GitItemUiFactoryITest {
         Throwable actual = thrownBy(() -> factory.create(uiContext, null, INDEX));
 
         assertThat(actual)
-                .hasMessage(ITEM_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -57,7 +58,7 @@ public class GitItemUiFactoryITest {
         Throwable actual = thrownBy(() -> factory.create(uiContext, gitItem, -1));
 
         assertThat(actual)
-                .hasMessage(INDEX_MUST_NOT_BE_NEGATIVE)
+                .hasMessage(Messages.get("INDEX_MUST_NOT_BE_NEGATIVE"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

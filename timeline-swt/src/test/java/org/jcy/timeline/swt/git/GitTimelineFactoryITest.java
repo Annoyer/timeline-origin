@@ -1,11 +1,11 @@
 package org.jcy.timeline.swt.git;
 
 import org.jcy.timeline.core.provider.git.GitItem;
+import org.jcy.timeline.core.util.FileStorageStructure;
 import org.jcy.timeline.swt.ui.SwtTimeline;
 import org.jcy.timeline.test.util.swt.DisplayHelper;
 import org.jcy.timeline.test.util.GitRepository;
 import org.jcy.timeline.test.util.GitRule;
-import org.jcy.timeline.core.util.FileStorageStructure;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.Before;
 import org.junit.Rule;

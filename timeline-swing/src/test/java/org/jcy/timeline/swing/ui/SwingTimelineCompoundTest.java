@@ -6,6 +6,7 @@ import org.jcy.timeline.core.model.Memento;
 import org.jcy.timeline.core.model.SessionStorage;
 import org.jcy.timeline.core.ui.ItemUiFactory;
 import org.jcy.timeline.util.BackgroundProcessor;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,7 +54,7 @@ public class SwingTimelineCompoundTest {
         Throwable actual = thrownBy(() -> new SwingTimelineCompound<>(null, itemUiFactory, sessionStorage));
 
         assertThat(actual)
-                .hasMessage(ITEM_PROVIDER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_PROVIDER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -62,7 +63,7 @@ public class SwingTimelineCompoundTest {
         Throwable actual = thrownBy(() -> new SwingTimelineCompound<>(itemProvider, null, sessionStorage));
 
         assertThat(actual)
-                .hasMessage(ITEM_UI_FACTORY_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_UI_FACTORY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -71,7 +72,7 @@ public class SwingTimelineCompoundTest {
         Throwable actual = thrownBy(() -> new SwingTimelineCompound<>(itemProvider, itemUiFactory, null));
 
         assertThat(actual)
-                .hasMessage(SESSION_STORAGE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("SESSION_STORAGE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

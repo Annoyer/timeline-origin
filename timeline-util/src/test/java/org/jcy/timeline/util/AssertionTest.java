@@ -3,8 +3,6 @@ package org.jcy.timeline.util;
 import org.junit.Test;
 
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
-import static org.jcy.timeline.util.Assertion.ARGUMENTS_MUST_NOT_BE_NULL;
-import static org.jcy.timeline.util.Assertion.MESSAGE_PATTERN_MUST_NOT_BE_NULL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AssertionTest {
@@ -36,7 +34,7 @@ public class AssertionTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(MESSAGE_PATTERN_MUST_NOT_BE_NULL);
+                .hasMessage(Messages.get("MESSAGE_PATTERN_MUST_NOT_BE_NULL"));
     }
 
     @Test
@@ -45,7 +43,7 @@ public class AssertionTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ARGUMENTS_MUST_NOT_BE_NULL);
+                .hasMessage(Messages.get("ARGUMENTS_MUST_NOT_BE_NULL"));
     }
 
     @Test

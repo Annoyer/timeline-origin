@@ -2,6 +2,7 @@ package org.jcy.timeline.core.ui;
 
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.Timeline;
+import org.jcy.timeline.util.Messages;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,20 +11,13 @@ import static org.jcy.timeline.util.Assertion.checkArgument;
 
 public class ItemUiMap<T extends Item, U> {
 
-    static final String TIMELINE_MUST_NOT_BE_NULL = "Argument 'timeline' must not be null.";
-    static final String ITEM_UI_FACTORY_MUST_NOT_BE_NULL = "Argument 'itemUiFactory' must not be null.";
-    static final String ID_MUST_NOT_BE_NULL = "Argument 'id' must not be null.";
-    static final String UI_CONTEXT_MUST_NOT_BE_NULL = "Argument 'uiContext' must not be null.";
-    static final String UNKNOWN_ITEM_UI_ENTRY = "Id <%s> does not refer to a mapped ItemUi entry.";
-    static final String OPERATION_MUST_NOT_BE_NULL = "Argument 'operation' must not be null.";
-
     protected final ItemUiFactory<T, U> itemUiFactory;
     protected final Map<String, ItemUi<T>> itemUis;
     protected final Timeline<T> timeline;
 
     public ItemUiMap(Timeline<T> timeline, ItemUiFactory<T, U> itemUiFactory) {
-        checkArgument(timeline != null, TIMELINE_MUST_NOT_BE_NULL);
-        checkArgument(itemUiFactory != null, ITEM_UI_FACTORY_MUST_NOT_BE_NULL);
+        checkArgument(timeline != null, Messages.get("TIMELINE_MUST_NOT_BE_NULL"));
+        checkArgument(itemUiFactory != null, Messages.get("ITEM_UI_FACTORY_MUST_NOT_BE_NULL"));
 
         this.itemUiFactory = itemUiFactory;
         this.timeline = timeline;
@@ -31,14 +25,14 @@ public class ItemUiMap<T extends Item, U> {
     }
 
     public boolean containsItemUi(String id) {
-        checkArgument(id != null, ID_MUST_NOT_BE_NULL);
+        checkArgument(id != null, Messages.get("ID_MUST_NOT_BE_NULL"));
 
         return itemUis.containsKey(id);
     }
 
     public ItemUi<T> findByItemId(String id) {
-        checkArgument(id != null, ID_MUST_NOT_BE_NULL);
-        checkArgument(containsItemUi(id), UNKNOWN_ITEM_UI_ENTRY, id);
+        checkArgument(id != null, Messages.get("ID_MUST_NOT_BE_NULL"));
+        checkArgument(containsItemUi(id), Messages.get("UNKNOWN_ITEM_UI_ENTRY"), id);
 
         return itemUis.get(id);
     }
@@ -48,13 +42,13 @@ public class ItemUiMap<T extends Item, U> {
     }
 
     public void fetch(FetchOperation operation) {
-        checkArgument(operation != null, OPERATION_MUST_NOT_BE_NULL);
+        checkArgument(operation != null, Messages.get("OPERATION_MUST_NOT_BE_NULL"));
 
         operation.fetch(timeline);
     }
 
     public void update(U uiContext) {
-        checkArgument(uiContext != null, UI_CONTEXT_MUST_NOT_BE_NULL);
+        checkArgument(uiContext != null, Messages.get("UI_CONTEXT_MUST_NOT_BE_NULL"));
 
         timeline.getItems().forEach(item -> doUpdate(uiContext, item));
     }

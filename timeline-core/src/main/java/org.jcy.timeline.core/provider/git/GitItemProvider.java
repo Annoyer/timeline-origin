@@ -8,6 +8,7 @@ import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jcy.timeline.core.model.ItemProvider;
+import org.jcy.timeline.util.Messages;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,22 +18,12 @@ import java.util.Optional;
 import static org.jcy.timeline.core.provider.git.GitItem.ofCommit;
 import static org.jcy.timeline.core.provider.git.GitOperator.guarded;
 import static org.jcy.timeline.util.Assertion.checkArgument;
-import static java.lang.String.format;
 import static java.lang.System.getProperty;
 import static java.util.stream.Collectors.toList;
 import static org.eclipse.jgit.api.Git.cloneRepository;
 import static org.jcy.timeline.util.Iterables.asList;
 
 public class GitItemProvider implements ItemProvider<GitItem> {
-
-    static final String URI_MUST_NOT_BE_NULL = "Argument 'uri' must not be null.";
-    static final String DESTINATION_MUST_NOT_BE_NULL = "Argument 'destination' must not be null.";
-    static final String NAME_MUST_NOT_BE_NULL = "Argument 'name' must not be null.";
-    static final String FETCH_COUNT_MUST_NOT_BE_NEGATIVE = "Argument 'fetchCount' must not be negative.";
-    static final String LATEST_ITEM_MUST_NOT_BE_NULL = "Argument 'latestItem' must not be null.";
-    static final String DESTINATION_MUST_BE_A_DIRECTORY = "Destination <%s> must be a directory.";
-    static final String UNKNOWN_GIT_ITEM = "GitItem <%s> is unknown in repository <%s>.";
-    static final String URI_IS_NOT_VALID = "URI <%s> is not valid.";
 
     private final GitOperator operator;
 
@@ -41,17 +32,17 @@ public class GitItemProvider implements ItemProvider<GitItem> {
     }
 
     public GitItemProvider(String uri, File destination, String name) {
-        checkArgument(uri != null, URI_MUST_NOT_BE_NULL);
-        checkArgument(destination != null, DESTINATION_MUST_NOT_BE_NULL);
-        checkArgument(name != null, NAME_MUST_NOT_BE_NULL);
-        checkArgument(!destination.exists() || destination.isDirectory(), DESTINATION_MUST_BE_A_DIRECTORY, destination);
+        checkArgument(uri != null, Messages.get("URI_MUST_NOT_BE_NULL"));
+        checkArgument(destination != null, Messages.get("DESTINATION_MUST_NOT_BE_NULL"));
+        checkArgument(name != null, Messages.get("NAME_MUST_NOT_BE_NULL"));
+        checkArgument(!destination.exists() || destination.isDirectory(), Messages.get("DESTINATION_MUST_BE_A_DIRECTORY, destination"));
 
         operator = new GitOperator(cloneIfNeeded(uri, destination, name));
     }
 
     @Override
     public List<GitItem> fetchItems(GitItem oldestItem, int fetchCount) {
-        checkArgument(fetchCount >= 0, FETCH_COUNT_MUST_NOT_BE_NEGATIVE);
+        checkArgument(fetchCount >= 0, Messages.get("FETCH_COUNT_MUST_NOT_BE_NEGATIVE"));
 
         // 拉取oldestItem开始的fetchCount+1条commits，删除oldestItem本身，封装并返回。
         // 如果oldestItem == null，拿最新的fetchCount条
@@ -69,7 +60,7 @@ public class GitItemProvider implements ItemProvider<GitItem> {
 
     @Override
     public List<GitItem> fetchNew(GitItem latestItem) {
-        checkArgument(latestItem != null, LATEST_ITEM_MUST_NOT_BE_NULL);
+        checkArgument(latestItem != null, Messages.get("LATEST_ITEM_MUST_NOT_BE_NULL"));
 
         // 拉取应用启动后的更新记录，最多100条。
         // computeNewCount计算出latestItem在commits中的位置，如果存在，只返回latestItem之后提交的commit记录。
@@ -108,7 +99,7 @@ public class GitItemProvider implements ItemProvider<GitItem> {
         try {
             return cloneRepository().setURI(uri).setDirectory(repositoryDir).call();
         } catch (InvalidRemoteException ire) {
-            throw new IllegalArgumentException(format(URI_IS_NOT_VALID, uri));
+            throw new IllegalArgumentException(Messages.get("URI_IS_NOT_VALID", uri));
         }
     }
 
@@ -133,7 +124,7 @@ public class GitItemProvider implements ItemProvider<GitItem> {
             return asList(git.log().add(getId(oldestItem)).setMaxCount(fetchCount + 1).call());
         } catch (MissingObjectException moe) {
             File directory = git.getRepository().getDirectory();
-            throw new IllegalArgumentException(format(UNKNOWN_GIT_ITEM, oldestItem, directory), moe);
+            throw new IllegalArgumentException(Messages.get("UNKNOWN_GIT_ITEM", oldestItem, directory), moe);
         }
     }
 

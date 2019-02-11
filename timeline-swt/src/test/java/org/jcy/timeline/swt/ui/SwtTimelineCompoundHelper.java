@@ -1,9 +1,9 @@
 package org.jcy.timeline.swt.ui;
 
-import org.jcy.timeline.core.model.Item;
-import org.jcy.timeline.core.ui.ItemViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.jcy.timeline.core.model.Item;
+import org.jcy.timeline.core.ui.ItemViewer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

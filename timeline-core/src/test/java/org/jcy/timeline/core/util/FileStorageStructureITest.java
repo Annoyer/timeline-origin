@@ -3,6 +3,7 @@ package org.jcy.timeline.core.util;
 import org.jcy.timeline.test.util.ConditionalIgnoreRule;
 import org.jcy.timeline.test.util.ConditionalIgnoreRule.ConditionalIgnore;
 import org.jcy.timeline.test.util.NotRunningOnWindows;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -97,7 +98,7 @@ public class FileStorageStructureITest {
         Throwable actual = thrownBy(() -> new FileStorageStructure(null));
 
         assertThat(actual)
-                .hasMessage(FileStorageStructure.BASE_DIRECTORY_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("BASE_DIRECTORY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

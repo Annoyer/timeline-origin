@@ -3,13 +3,11 @@ package org.jcy.timeline.core.provider.git;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jcy.timeline.core.model.Item;
+import org.jcy.timeline.util.Messages;
 
 import static org.jcy.timeline.util.Assertion.checkArgument;
 
 public class GitItem extends Item {
-
-    static final String AUTHOR_MUST_NOT_BE_NULL = "Argument 'author' must not be null.";
-    static final String CONTENT_MUST_NOT_BE_NULL = "Argument 'content' must not be null.";
 
     private final String content;
     private final String author;
@@ -21,8 +19,8 @@ public class GitItem extends Item {
 
     public GitItem(String id, long timeStamp, String author, String content) {
         super(id, timeStamp);
-        checkArgument(author != null, AUTHOR_MUST_NOT_BE_NULL);
-        checkArgument(content != null, CONTENT_MUST_NOT_BE_NULL);
+        checkArgument(author != null, Messages.get("AUTHOR_MUST_NOT_BE_NULL"));
+        checkArgument(content != null, Messages.get("CONTENT_MUST_NOT_BE_NULL"));
 
         this.author = author;
         this.content = content;

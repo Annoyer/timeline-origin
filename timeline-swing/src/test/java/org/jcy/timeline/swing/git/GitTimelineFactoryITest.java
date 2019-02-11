@@ -1,10 +1,10 @@
 package org.jcy.timeline.swing.git;
 
 import org.jcy.timeline.core.provider.git.GitItem;
+import org.jcy.timeline.core.util.FileStorageStructure;
 import org.jcy.timeline.swing.ui.SwingTimeline;
 import org.jcy.timeline.test.util.GitRepository;
 import org.jcy.timeline.test.util.GitRule;
-import org.jcy.timeline.core.util.FileStorageStructure;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

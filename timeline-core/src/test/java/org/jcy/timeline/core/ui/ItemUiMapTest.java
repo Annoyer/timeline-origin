@@ -2,6 +2,7 @@ package org.jcy.timeline.core.ui;
 
 import org.jcy.timeline.core.model.FakeItem;
 import org.jcy.timeline.core.model.Timeline;
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,7 +59,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> itemUiMap.update(null));
 
         assertThat(actual)
-                .hasMessageContaining(UI_CONTEXT_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("UI_CONTEXT_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -85,7 +86,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> itemUiMap.findByItemId(null));
 
         assertThat(actual)
-                .hasMessageContaining(ID_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("ID_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -110,7 +111,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> itemUiMap.containsItemUi(null));
 
         assertThat(actual)
-                .hasMessageContaining(ID_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("ID_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -146,7 +147,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> itemUiMap.fetch(null));
 
         assertThat(actual)
-                .hasMessage(OPERATION_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("OPERATION_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -155,7 +156,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> new ItemUiMap<>(null, stubItemUiFactory(null, null, null, 0)));
 
         assertThat(actual)
-                .hasMessage(TIMELINE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("TIMELINE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -164,7 +165,7 @@ public class ItemUiMapTest {
         Throwable actual = thrownBy(() -> new ItemUiMap<>(timeline, null));
 
         assertThat(actual)
-                .hasMessage(ITEM_UI_FACTORY_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_UI_FACTORY_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

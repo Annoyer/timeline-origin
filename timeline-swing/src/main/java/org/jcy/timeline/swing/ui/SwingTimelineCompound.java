@@ -8,16 +8,13 @@ import org.jcy.timeline.core.ui.AutoUpdate;
 import org.jcy.timeline.core.ui.ItemUiFactory;
 import org.jcy.timeline.core.ui.ItemViewer;
 import org.jcy.timeline.util.BackgroundProcessor;
+import org.jcy.timeline.util.Messages;
 
 import java.awt.*;
 
 import static org.jcy.timeline.util.Assertion.checkArgument;
 
 class SwingTimelineCompound<T extends Item> {
-
-    static final String ITEM_PROVIDER_MUST_NOT_BE_NULL = "Argument 'itemProvider' must not be null.";
-    static final String ITEM_UI_FACTORY_MUST_NOT_BE_NULL = "Argument 'itemUiFactory' must not be null.";
-    static final String SESSION_STORAGE_MUST_NOT_BE_NULL = "Argument 'sessionStorage' must not be null.";
 
     private final ItemViewer<T, Container> itemViewer;
     private final AutoUpdate<T, Container> autoUpdate;
@@ -29,9 +26,9 @@ class SwingTimelineCompound<T extends Item> {
 
     SwingTimelineCompound(
             ItemProvider<T> itemProvider, ItemUiFactory<T, Container> itemUiFactory, SessionStorage<T> sessionStorage) {
-        checkArgument(itemProvider != null, ITEM_PROVIDER_MUST_NOT_BE_NULL);
-        checkArgument(itemUiFactory != null, ITEM_UI_FACTORY_MUST_NOT_BE_NULL);
-        checkArgument(sessionStorage != null, SESSION_STORAGE_MUST_NOT_BE_NULL);
+        checkArgument(itemProvider != null, Messages.get("ITEM_PROVIDER_MUST_NOT_BE_NULL"));
+        checkArgument(itemUiFactory != null, Messages.get("ITEM_UI_FACTORY_MUST_NOT_BE_NULL"));
+        checkArgument(sessionStorage != null, Messages.get("SESSION_STORAGE_MUST_NOT_BE_NULL"));
 
         Timeline<T> timeline = new Timeline<>(itemProvider, sessionStorage);
         itemViewer = new ItemViewer<>(new SwingItemViewerCompound<>(timeline, itemUiFactory));

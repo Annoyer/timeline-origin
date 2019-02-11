@@ -3,6 +3,7 @@ package org.jcy.timeline.swing.ui;
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.ui.AutoUpdate;
 import org.jcy.timeline.core.ui.ItemViewer;
+import org.jcy.timeline.util.Messages;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class SwingAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwingAutoUpdate<>(null, itemViewer, DELAY));
 
         assertThat(actual)
-                .hasMessage(HEADER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("HEADER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -74,7 +75,7 @@ public class SwingAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwingAutoUpdate<>(header, null, DELAY));
 
         assertThat(actual)
-                .hasMessage(ITEM_VIEWER_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITEM_VIEWER_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -83,7 +84,7 @@ public class SwingAutoUpdateITest {
         Throwable actual = thrownBy(() -> new SwingAutoUpdate<>(header, itemViewer, -1));
 
         assertThat(actual)
-                .hasMessage(DELAY_MUST_NOT_BE_NEGATIVE)
+                .hasMessage(Messages.get("DELAY_MUST_NOT_BE_NEGATIVE"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

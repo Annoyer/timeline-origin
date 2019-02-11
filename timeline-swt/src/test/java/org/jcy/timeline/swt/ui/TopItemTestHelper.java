@@ -1,12 +1,12 @@
 package org.jcy.timeline.swt.ui;
 
-import org.jcy.timeline.core.model.Item;
-import org.jcy.timeline.core.model.Timeline;
-import org.jcy.timeline.core.ui.ItemUiMap;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.jcy.timeline.core.model.Item;
+import org.jcy.timeline.core.model.Timeline;
+import org.jcy.timeline.core.ui.ItemUiMap;
 
 import java.util.Optional;
 

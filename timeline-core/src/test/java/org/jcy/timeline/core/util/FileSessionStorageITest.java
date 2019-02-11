@@ -4,6 +4,7 @@ import org.jcy.timeline.core.model.FakeItem;
 import org.jcy.timeline.core.model.FakeItemSerialization;
 import org.jcy.timeline.core.model.Memento;
 import org.jcy.timeline.core.model.MementoAssert;
+import org.jcy.timeline.util.Messages;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -14,9 +15,7 @@ import java.util.Optional;
 
 import static org.jcy.timeline.core.model.FakeItems.ALL_ITEMS;
 import static org.jcy.timeline.core.model.FakeItems.FIRST_ITEM;
-import static org.jcy.timeline.core.model.MementoAssert.assertThat;
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
-import static org.jcy.timeline.core.util.FileSessionStorage.STORAGE_LOCATION_MUST_NOT_BE_NULL;
 import static java.nio.file.Files.readAllBytes;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -82,7 +81,7 @@ public class FileSessionStorageITest {
         Throwable actual = thrownBy(() -> new FileSessionStorage<>(null, new FakeItemSerialization()));
 
         assertThat(actual)
-                .hasMessageContaining(STORAGE_LOCATION_MUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("STORAGE_LOCATION_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -91,7 +90,7 @@ public class FileSessionStorageITest {
         Throwable actual = thrownBy(() -> new FileSessionStorage<>(temporaryFolder.newFile(), null));
 
         assertThat(actual)
-                .hasMessageContaining(FileSessionStorage.ITEM_SERIALIZATION_NUST_NOT_BE_NULL)
+                .hasMessageContaining(Messages.get("ITEM_SERIALIZATION_NUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

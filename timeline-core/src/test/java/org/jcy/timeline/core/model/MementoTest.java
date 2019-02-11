@@ -1,5 +1,6 @@
 package org.jcy.timeline.core.model;
 
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,7 +72,7 @@ public class MementoTest {
         Throwable actual = thrownBy(() -> new Memento<>(new HashSet<>(), UNRELATED_ITEM));
 
         assertThat(actual)
-                .hasMessage(TOP_ITEM_IS_UNRELATED)
+                .hasMessage(Messages.get("TOP_ITEM_IS_UNRELATED"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -80,7 +81,7 @@ public class MementoTest {
         Throwable actual = thrownBy(() -> new Memento<>(ALL_ITEMS, Optional.empty()));
 
         assertThat(actual)
-                .hasMessage(TOP_ITEM_IS_MISSING)
+                .hasMessage(Messages.get("TOP_ITEM_IS_MISSING"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -89,7 +90,7 @@ public class MementoTest {
         Throwable actual = thrownBy(() -> new Memento<>(ALL_ITEMS, UNRELATED_ITEM));
 
         assertThat(actual)
-                .hasMessage(TOP_ITEM_IS_UNRELATED)
+                .hasMessage(Messages.get("TOP_ITEM_IS_UNRELATED"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -98,7 +99,7 @@ public class MementoTest {
         Throwable actual = thrownBy(() -> new Memento<>(null, Optional.empty()));
 
         assertThat(actual)
-                .hasMessage(ARGUMENT_ITEMS_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ARGUMENT_ITEMS_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -107,7 +108,7 @@ public class MementoTest {
         Throwable actual = thrownBy(() -> new Memento<>(new HashSet<>(), null));
 
         assertThat(actual)
-                .hasMessage(ARGUMENT_TOP_ITEM_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ARGUMENT_TOP_ITEM_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

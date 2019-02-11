@@ -3,6 +3,7 @@ package org.jcy.timeline.swing.ui;
 import org.jcy.timeline.core.model.Item;
 import org.jcy.timeline.core.model.Timeline;
 import org.jcy.timeline.util.BackgroundProcessor;
+import org.jcy.timeline.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,6 @@ import static org.jcy.timeline.util.Assertion.checkArgument;
 class Header<T extends Item> {
 
     static final String TITLE = "Timeline";
-    static final String TITLE_MUST_NOT_BE_NULL = "Argument 'title' must not be null.";
 
     private final BackgroundProcessor backgroundProcessor;
     private final Timeline<T> timeline;
@@ -57,7 +57,7 @@ class Header<T extends Item> {
     }
 
     void setTitle(String title) {
-        checkArgument(title != null, TITLE_MUST_NOT_BE_NULL);
+        checkArgument(title != null, Messages.get("TITLE_MUST_NOT_BE_NULL"));
 
         this.title.setText(title);
     }

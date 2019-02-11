@@ -1,9 +1,9 @@
 package org.jcy.timeline.swing.ui;
 
+import org.jcy.timeline.util.Messages;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.jcy.timeline.swing.ui.SwingUiThreadDispatcher.RUNNABLE_MUST_NOT_BE_NULL;
 import static org.jcy.timeline.test.util.ThreadHelper.sleep;
 import static org.jcy.timeline.test.util.ThrowableCaptor.thrownBy;
 import static java.lang.Thread.currentThread;
@@ -35,7 +35,7 @@ public class SwingUiThreadDispatcherITest {
         Throwable actual = thrownBy(() -> dispatcher.dispatch(null));
 
         assertThat(actual)
-                .hasMessage(RUNNABLE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("RUNNABLE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

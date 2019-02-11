@@ -27,7 +27,7 @@ public class IterablesTest {
         Throwable actual = thrownBy(() -> Iterables.asList(null));
 
         assertThat(actual)
-                .hasMessage(Iterables.ITERABLE_MUST_NOT_BE_NULL)
+                .hasMessage(Messages.get("ITERABLE_MUST_NOT_BE_NULL"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

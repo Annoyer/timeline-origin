@@ -2,6 +2,7 @@ package org.jcy.timeline.core.provider.git;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
+import org.jcy.timeline.util.Messages;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +13,6 @@ import static org.eclipse.jgit.api.Git.open;
 import static org.jcy.timeline.util.Exceptions.guard;
 
 class GitOperator {
-
-    static final String DIRECTORY_CONTAINS_NO_GIT_REPOSITORY = "Directory <%s> contains no git repository.";
 
     private final File repositoryLocation;
 
@@ -48,7 +47,7 @@ class GitOperator {
         try {
             return open(repositoryDir);
         } catch (RepositoryNotFoundException rnfe) {
-            throw new IllegalArgumentException(format(DIRECTORY_CONTAINS_NO_GIT_REPOSITORY, repositoryDir), rnfe);
+            throw new IllegalArgumentException(Messages.get("DIRECTORY_CONTAINS_NO_GIT_REPOSITORY", repositoryDir), rnfe);
         }
     }
 }
