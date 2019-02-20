@@ -6,7 +6,6 @@ import org.jcy.timeline.web.model.RegisterRequest;
 import org.jcy.timeline.web.model.RegisterResponse;
 import org.jcy.timeline.web.service.TimelineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +52,7 @@ public class TimelineController {
 	@RequestMapping("/new")
 	@ResponseBody
 	public FetchResponse fetchNew(FetchRequest request) {
-		return timelineService.fetchNew(request.getSessionId());
+		return timelineService.fetchNew(request.getId());
 	}
 
 	/**
@@ -63,7 +62,7 @@ public class TimelineController {
 	@RequestMapping("/more")
 	@ResponseBody
 	public FetchResponse fetchMore(FetchRequest request) {
-		return timelineService.fetchMore(request.getSessionId());
+		return timelineService.fetchMore(request.getId());
 	}
 
 }

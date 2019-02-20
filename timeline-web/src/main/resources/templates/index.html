@@ -23,10 +23,12 @@
 
 <button id="more">more</button>
 
-<button id="new">new</button>
+<button id="new" disabled="disabled">new</button>
 
 </body>
 <script type="text/javascript" th:inline="javascript">
+
+    var id = null;
 
     $("#connectBtn").click(function() {
         var uri = $("#uri").val();
@@ -39,9 +41,10 @@
             },
             dataType: "json",
             success: function(data){
-                showItems(data);
                 if (data.success) {
-                    connect(data.id);
+                    showItems(data.items)
+                    id = data.id;
+                    connect();
                 } else {
                     console.error(data.cause);
                 }
@@ -52,7 +55,7 @@
         });
     });
 
-    function connect(id) {
+    function connect() {
         var socket = new SockJS('/timeline/timeline-ws');
         var client = Stomp.over(socket);
 
@@ -62,7 +65,12 @@
             console.log('client[sessionId=%s] connect success: %s', id, succ);
 
             client.subscribe("/user/unicast/autoUpdate", function(message) {
-                showItems(message);
+                var obj = JSON.parse(message.body);
+                showItems(obj.items);
+                if (obj.newCount > 0) {
+                    $("#new").text(obj.newCount + "new");
+                    $("#new").prop("disabled", false);
+                }
             });
 
             client.send("/msg/startAutoUpdate", {}, "");
@@ -71,6 +79,39 @@
             console.log('client[sessionId=%s] connect error: %s', id, error);
         });
     }
+    
+    $("#more").click(function() {
+        $.ajax({
+            url: "/timeline/more",
+            data: {
+                id : id
+            },
+            dataType: "json",
+            success: function(data){
+                showItems(data.items);
+            },
+            error: function(data) {
+                console.error(data);
+            }
+        });
+    });
+
+    $("#new").click(function() {
+        $("#new").prop("disabled", true);
+        $.ajax({
+            url: "/timeline/new",
+            data: {
+                id : id
+            },
+            dataType: "json",
+            success: function(data){
+                showItems(data.items);
+            },
+            error: function(data) {
+                console.error(data);
+            }
+        });
+    });
 
     function showItems(message) {
         console.log(message);

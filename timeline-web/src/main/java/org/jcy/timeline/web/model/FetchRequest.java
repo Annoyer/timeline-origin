@@ -2,14 +2,13 @@ package org.jcy.timeline.web.model;
 
 public class FetchRequest {
 
-	private String sessionId;
+	private String id;
 
-	public String getSessionId() {
-		return this.sessionId;
+	public String getId() {
+		return id;
 	}
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
+	public void setId(String id) {
+		this.id = id;
 	}
-
 }

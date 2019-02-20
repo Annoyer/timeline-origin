@@ -1,5 +1,6 @@
 package org.jcy.timeline.web.service;
 
+import org.jcy.timeline.core.provider.git.GitItem;
 import org.jcy.timeline.core.ui.FetchOperation;
 import org.jcy.timeline.web.model.FetchResponse;
 import org.jcy.timeline.web.model.GitItemUi;
@@ -7,8 +8,11 @@ import org.jcy.timeline.web.model.RegisterResponse;
 import org.jcy.timeline.web.ui.WebTimeline;
 import org.jcy.timeline.web.ui.WebTimelineFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -39,7 +43,7 @@ public class TimelineService {
 		}
 
 		response.setSuccess(true);
-		response.setItems(timeline.getItems().stream().map(GitItemUi::new).collect(Collectors.toList()));
+		response.setItems(this.convert(timeline.getItems()));
 
 		return response;
 	}
@@ -97,8 +101,16 @@ public class TimelineService {
 			return response;
 		}
 
-		timeline.fetch(fetchOperation);
+		response.setItems(this.convert(timeline.fetch(fetchOperation)));
 		response.setSuccess(true);
 		return response;
+	}
+
+	private List<GitItemUi> convert(List<GitItem> items) {
+		if (!CollectionUtils.isEmpty(items)) {
+			return items.stream().map(GitItemUi::new).collect(Collectors.toList());
+		}
+
+		return Collections.EMPTY_LIST;
 	}
 }
