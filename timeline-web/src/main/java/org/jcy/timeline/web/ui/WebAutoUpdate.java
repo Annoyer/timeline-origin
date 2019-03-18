@@ -13,7 +13,7 @@ public class WebAutoUpdate implements AutoUpdate {
 
     private static final int AUTO_UPDATE_INTERVAL = 5000;
 
-    private volatile boolean isScheduled = false;
+    volatile boolean isScheduled = false;
 
     private Timer timer;
 
@@ -21,7 +21,7 @@ public class WebAutoUpdate implements AutoUpdate {
 
     private final String sessionId;
 
-    WebAutoUpdate(String sessionId, Timeline<GitItem> timeline) {
+    public WebAutoUpdate(String sessionId, Timeline<GitItem> timeline) {
         this.sessionId = sessionId;
         this.timeline = timeline;
     }
@@ -42,9 +42,11 @@ public class WebAutoUpdate implements AutoUpdate {
     @Override
     public void stop() {
         synchronized (this) {
-            timer.cancel();
-            timer.purge();
-            this.isScheduled = false;
+            if (timer != null) {
+                timer.cancel();
+                timer.purge();
+                this.isScheduled = false;
+            }
         }
     }
 

@@ -21,13 +21,6 @@ public class WebSocketEventListener {
     private TimelineService timelineService;
 
     @EventListener
-    public void handleUnsubscribeEvent(SessionUnsubscribeEvent event) {
-        log.info("[ws-unsubscribe] socket disconnect: {}", event.getMessage());
-        this.unregister(event.getUser());
-
-    }
-
-    @EventListener
     public void handleDisconnectListener(SessionDisconnectEvent event) {
         log.info("[ws-disconnect] socket disconnect: {}", event.getMessage());
         this.unregister(event.getUser());

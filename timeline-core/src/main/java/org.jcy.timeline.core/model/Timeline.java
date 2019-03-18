@@ -42,8 +42,8 @@ public class Timeline<T extends Item> {
     }
 
     public void setFetchCount(int fetchCount) {
-        checkArgument(fetchCount <= FETCH_COUNT_UPPER_BOUND, Messages.get("ERROR_EXCEEDS_UPPER_BOUND", FETCH_COUNT_UPPER_BOUND), fetchCount);
-        checkArgument(fetchCount >= FETCH_COUNT_LOWER_BOUND, Messages.get("ERROR_EXCEEDS_LOWER_BOUND", FETCH_COUNT_LOWER_BOUND), fetchCount);
+        checkArgument(fetchCount <= FETCH_COUNT_UPPER_BOUND, Messages.get("ERROR_EXCEEDS_UPPER_BOUND", FETCH_COUNT_UPPER_BOUND, fetchCount));
+        checkArgument(fetchCount >= FETCH_COUNT_LOWER_BOUND, Messages.get("ERROR_EXCEEDS_LOWER_BOUND", FETCH_COUNT_LOWER_BOUND, fetchCount));
         this.fetchCount = fetchCount;
     }
 

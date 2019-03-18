@@ -1,10 +1,8 @@
 package org.jcy.timeline.web.ui;
 
-import org.jcy.timeline.core.model.ItemProvider;
 import org.jcy.timeline.core.model.Timeline;
 import org.jcy.timeline.core.provider.git.GitItem;
 import org.jcy.timeline.core.ui.FetchOperation;
-import org.jcy.timeline.core.util.FileSessionStorage;
 
 import java.util.List;
 
@@ -16,26 +14,19 @@ public class WebTimeline {
 
     private WebAutoUpdate autoUpdate;
 
-    public WebTimeline(String sessionId, ItemProvider<GitItem> itemItemProvider, FileSessionStorage<GitItem> sessionStorage) {
+    public WebTimeline(String sessionId, Timeline<GitItem> timeline, WebAutoUpdate autoUpdate) {
         this.sessionId = sessionId;
-        this.timeline = new Timeline<>(itemItemProvider, sessionStorage);
+        this.timeline = timeline;
         this.timeline.fetchItems();
+        this.autoUpdate = autoUpdate;
     }
 
     public void startAutoFresh() {
-        synchronized (this) {
-            if (autoUpdate == null) {
-                autoUpdate = new WebAutoUpdate(sessionId, timeline);
-            }
-        }
-
         autoUpdate.start();
     }
 
     public void stopAutoFresh() {
-        if (autoUpdate != null) {
-            autoUpdate.stop();
-        }
+        autoUpdate.stop();
     }
 
     public List<GitItem> fetch(FetchOperation fetchOperation) {

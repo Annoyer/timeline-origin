@@ -17,8 +17,9 @@ public class MessageUtils implements ApplicationContextAware {
         autoUpdateService = applicationContext.getBean(AutoUpdateService.class);
     }
 
-    public static void send(String sessionId, UpdateInfo updateInfo) {
+    public static boolean send(String sessionId, UpdateInfo updateInfo) {
         autoUpdateService.notifyUpdate(sessionId, updateInfo);
+        return true;
     }
 
 }

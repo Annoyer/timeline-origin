@@ -34,7 +34,7 @@
         var uri = $("#uri").val();
         var projectName = $("#projectName").val();
         $.ajax({
-            url: "/timeline/register",
+            url: "/register",
             data: {
                 uri : uri,
                 projectName : projectName
@@ -56,7 +56,7 @@
     });
 
     function connect() {
-        var socket = new SockJS('/timeline/timeline-ws');
+        var socket = new SockJS('/timeline-ws');
         var client = Stomp.over(socket);
 
         client.connect({
@@ -82,7 +82,7 @@
     
     $("#more").click(function() {
         $.ajax({
-            url: "/timeline/more",
+            url: "/more",
             data: {
                 id : id
             },
@@ -99,7 +99,7 @@
     $("#new").click(function() {
         $("#new").prop("disabled", true);
         $.ajax({
-            url: "/timeline/new",
+            url: "/new",
             data: {
                 id : id
             },

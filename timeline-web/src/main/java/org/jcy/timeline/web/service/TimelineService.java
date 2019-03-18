@@ -7,6 +7,7 @@ import org.jcy.timeline.web.model.GitItemUi;
 import org.jcy.timeline.web.model.RegisterResponse;
 import org.jcy.timeline.web.ui.WebTimeline;
 import org.jcy.timeline.web.ui.WebTimelineFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class TimelineService {
+
+	@Autowired
+	private WebTimelineFactory webTimelineFactory;
 
 	private static final Map<String, WebTimeline> timelineMapping = new HashMap<>();
 
@@ -34,7 +38,7 @@ public class TimelineService {
 	public RegisterResponse register(String sessionId, String uri, String projectName) {
 		RegisterResponse response = new RegisterResponse();
 		response.setId(sessionId);
-		WebTimeline timeline = WebTimelineFactory.create(sessionId, uri, projectName);
+		WebTimeline timeline = webTimelineFactory.create(sessionId, uri, projectName);
 		synchronized (timelineMapping) {
 			if (timelineMapping.containsKey(sessionId)) {
 				unregister(sessionId);

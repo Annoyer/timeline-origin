@@ -72,7 +72,7 @@ public class TimelineTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_LOWER_BOUND"), tooSmall));
+                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_LOWER_BOUND"), FETCH_COUNT_LOWER_BOUND, tooSmall));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class TimelineTest {
 
         assertThat(actual)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_UPPER_BOUND"), tooLarge));
+                .hasMessage(formatErrorMessage(Messages.get("ERROR_EXCEEDS_UPPER_BOUND"), FETCH_COUNT_UPPER_BOUND, tooLarge));
     }
 
     @Test
